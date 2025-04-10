@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 3.15)
 
 #! CHANGE YOUR PROJECT NAME
 #  It is used as your project's main executable name. 
-set(PROJECT_NAME template)
+set(PROJECT_NAME krykhitgrad)
 project(${PROJECT_NAME} C CXX) # project(${PROJECT_NAME} C CXX ASM)
 
 set(CMAKE_CXX_STANDARD 20)
@@ -55,13 +55,16 @@ include(cmake/CompilerWarnings.cmake)
 ##########################################################
 
 #! Project main executable source compilation
-add_executable(${PROJECT_NAME} main.cpp
-				options_parser/options_parser.cpp options_parser/options_parser.h)
+add_executable(${PROJECT_NAME} src/main.cpp
+		vendor/options_parser/options_parser.cpp vendor/options_parser/options_parser.h
+		include/common.h
+		include/tensor.h
+		src/value.cpp
+		include/nn.h)
 
 #! Put path to your project headers
-target_include_directories(${PROJECT_NAME} PRIVATE options_parser)
-
-#target_include_directories(${PROJECT_NAME} PUBLIC options_parser)
+target_include_directories(${PROJECT_NAME} PRIVATE vendor/options_parser)
+target_include_directories(${PROJECT_NAME} PRIVATE vendor/eigen)
 
 #! Add external packages
 # options_parser requires boost::program_options library
