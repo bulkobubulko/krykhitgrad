@@ -57,6 +57,7 @@ include(cmake/CompilerWarnings.cmake)
 #! Project main executable source compilation
 
 set(COMMON_SOURCES
+		src/value.cpp
 		src/tensor.cpp
 		src/nn.cpp
 		src/optim.cpp
@@ -67,7 +68,6 @@ add_executable(${PROJECT_NAME}
 		src/main.cpp
 		vendor/options_parser/options_parser.cpp
 		${COMMON_SOURCES}
-		tests/test_autograd.cpp
 )
 
 add_executable(mnist_example
@@ -76,7 +76,7 @@ add_executable(mnist_example
 )
 
 add_executable(test_autograd
-		test/test_autograd.cpp
+		tests/test_autograd.cpp
 		${COMMON_SOURCES}
 )
 
