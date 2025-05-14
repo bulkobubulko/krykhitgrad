@@ -8,11 +8,10 @@ test
 
 ./include/krykhitgrad.h
 ./include/common.h
-./include/nn.h
-./include/tensor.h
 
-./src/tensor.cpp
-./src/nn.cpp
+
+./data/mnist/
+
 
 
 ### C++ ###

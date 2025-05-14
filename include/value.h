@@ -16,6 +16,7 @@ private:
     std::set<std::shared_ptr<Value>> prev_;
     std::string label_;
     std::function<void()> backward_;
+
 public:
     explicit Value(double data, const std::string& label = ""); // leaf node
 

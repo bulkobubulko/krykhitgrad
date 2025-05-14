@@ -4,10 +4,11 @@
 #include <iostream>
 #include <Eigen/Eigen>
 #include "options_parser.h"
-#include "../include/tensor.h"
 #include "../include/value.h"
-#include "../include/graph_visualization.h"
+#include "../include/tensor.h"
 #include "../include/nn.h"
+#include "../include/graph_visualization.h"
+
 
 int main() {
     auto x1 = std::make_shared<Value>(0.5, "x1");

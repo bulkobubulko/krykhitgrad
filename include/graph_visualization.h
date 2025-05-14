@@ -59,7 +59,7 @@ public:
                   const std::string& format = "svg", const std::string& rankdir = "LR") {
         std::string dot_content = draw_dot(root, format, rankdir);
 
-        std::ofstream file(filename + ".dot"); // .dot
+        std::ofstream file(filename + ".dot"); // .dot, .svg
         if (!file.is_open()) {
             return false;
         }
