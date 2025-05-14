@@ -55,42 +55,49 @@ include(cmake/CompilerWarnings.cmake)
 ##########################################################
 
 #! Project main executable source compilation
-add_executable(${PROJECT_NAME}
-		src/main.cpp
-		vendor/options_parser/options_parser.cpp vendor/options_parser/options_parser.h
-		include/common.h
-		include/tensor.h src/tensor.cpp
-		include/value.h src/value.cpp
-		include/nn.h src/nn.cpp
-		include/optim.h src/optim.cpp
-		include/data.h src/data.cpp
-		examples/mnist.cpp
-#		include/utils.h
-#		src/utils.cpp
-#		test/test_autograd.cpp
-#		test/test_autograd.h
-)
 
-add_executable(mnist_example
-		examples/mnist.cpp
+set(COMMON_SOURCES
 		src/tensor.cpp
 		src/nn.cpp
 		src/optim.cpp
 		src/data.cpp
-#		src/utils.cpp
-#		vendor/options_parser/options_parser.cpp
 )
 
-#! Put path to your project headers
-target_include_directories(${PROJECT_NAME} PRIVATE vendor/options_parser)
-target_include_directories(${PROJECT_NAME} PRIVATE vendor/eigen)
-target_include_directories(${PROJECT_NAME} PRIVATE vendor/indicators/include)
-target_include_directories(${PROJECT_NAME} PRIVATE include)
+add_executable(${PROJECT_NAME}
+		src/main.cpp
+		vendor/options_parser/options_parser.cpp
+		${COMMON_SOURCES}
+		tests/test_autograd.cpp
+)
 
-#target_include_directories(mnist_example PRIVATE vendor/options_parser)
-target_include_directories(mnist_example PRIVATE vendor/eigen)
-target_include_directories(mnist_example PRIVATE vendor/indicators/include)
-target_include_directories(mnist_example PRIVATE include)
+add_executable(mnist_example
+		examples/mnist.cpp
+		${COMMON_SOURCES}
+)
+
+add_executable(test_autograd
+		test/test_autograd.cpp
+		${COMMON_SOURCES}
+)
+
+set(COMMON_INCLUDES
+		vendor/eigen
+		vendor/indicators/include
+		include
+)
+
+target_include_directories(${PROJECT_NAME} PRIVATE
+		vendor/options_parser
+		${COMMON_INCLUDES}
+)
+
+target_include_directories(mnist_example PRIVATE
+		${COMMON_INCLUDES}
+)
+
+target_include_directories(test_autograd PRIVATE
+		${COMMON_INCLUDES}
+)
 
 #! Add external packages
 # options_parser requires boost::program_options library
